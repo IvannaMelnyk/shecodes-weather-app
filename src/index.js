@@ -1,4 +1,3 @@
-import axios from "axios";
 //ch1
 let currentTime = new Date();
 function getCurrentDate(date) {
@@ -37,7 +36,7 @@ function getCurrentDay(date) {
     "Aug",
     "Sep",
     "Nov",
-    "Dec"
+    "Dec",
   ];
 
   let month = monthes[date.getMonth()];
