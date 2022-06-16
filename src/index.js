@@ -57,6 +57,7 @@ window.addEventListener("load", changeDay);
 //ch2
 function displaySearchCity(res) {
   let iconElement = document.querySelector("#icon");
+  celsiusTemperature = res.data.main.temp;
   document.querySelector(".weather-location").innerHTML = res.data.name;
   document.querySelector("#temperature").innerHTML = Math.round(
     res.data.main.temp
@@ -65,6 +66,7 @@ function displaySearchCity(res) {
   document.querySelector("#wind").innerHTML = Math.round(res.data.wind.speed);
   document.querySelector(".value").innerHTML = res.data.weather[0].description;
   document.querySelector("#precipitation").innerHTML = res.data.weather[0].main;
+
   iconElement.setAttribute(
     "src",
     `http://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`
@@ -103,19 +105,26 @@ function getCurrentWeather(event) {
 let currentLocation = document.querySelector(".button-current");
 currentLocation.addEventListener("click", getCurrentWeather);
 //ch3
+function changeToFarengeitTemp(event) {
+  event.preventDefault();
+  //remove active
+  celsiusLink.classList.remove("active");
+  farengeitLink.classList.add("active");
+  let farengeit = document.querySelector(".temp-degree");
+  farengeit.innerHTML = Math.ceil((celsiusTemperature * 9) / 5 + 32);
+}
 
 function changeToCelsiusTemp(event) {
   event.preventDefault();
+  farengeitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
   let celcius = document.querySelector(".temp-degree");
-  celcius.innerHTML = 20;
+  celcius.innerHTML = Math.round(celsiusTemperature);
 }
-function changeToFarengeitTemp(event) {
-  event.preventDefault();
-  let farengeit = document.querySelector(".temp-degree");
-  farengeit.innerHTML = Math.ceil(20 * 1.8 + 32);
-}
-let celsiusTemp = document.querySelector("#temp-celsius");
-celsiusTemp.addEventListener("click", changeToCelsiusTemp);
-let farengeitTemp = document.querySelector("#temp-farengeit");
-farengeitTemp.addEventListener("click", changeToFarengeitTemp);
+
+let celsiusTemperature = null;
+let celsiusLink = document.querySelector("#temp-celsius");
+celsiusLink.addEventListener("click", changeToCelsiusTemp);
+let farengeitLink = document.querySelector("#temp-farengeit");
+farengeitLink.addEventListener("click", changeToFarengeitTemp);
 ////
