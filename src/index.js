@@ -56,6 +56,7 @@ window.addEventListener("load", changeDay);
 
 //ch2
 function displaySearchCity(res) {
+  let iconElement = document.querySelector("#icon");
   document.querySelector(".weather-location").innerHTML = res.data.name;
   document.querySelector("#temperature").innerHTML = Math.round(
     res.data.main.temp
@@ -64,6 +65,11 @@ function displaySearchCity(res) {
   document.querySelector("#wind").innerHTML = Math.round(res.data.wind.speed);
   document.querySelector(".value").innerHTML = res.data.weather[0].description;
   document.querySelector("#precipitation").innerHTML = res.data.weather[0].main;
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", res.data.weather[0].description);
 }
 function handleSubmit(event) {
   event.preventDefault();
