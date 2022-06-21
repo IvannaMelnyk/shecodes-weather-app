@@ -212,11 +212,8 @@ a {
   margin-left: 20px;
   opacity: 0.5;
 }
-.units .active {
+#temp-celsius {
   color: black;
   cursor: default;
-  text-decoration: none;
-}
-.units .active:hover {
   text-decoration: none;
 }
