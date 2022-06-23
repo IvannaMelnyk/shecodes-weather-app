@@ -65,7 +65,7 @@ input {
 }
 .weather-location {
   text-transform: capitalize;
-  color: #dfb220;
+  color: #ec6e4c;
 }
 .container {
   min-height: 600px;
@@ -85,7 +85,7 @@ input {
 .main {
   width: 700px;
   margin: auto;
-  background-color: #bcddf8;
+  background-color: #e6e6e6;
   border-radius: 20px;
   box-shadow: 5px 6px 6px 2px #aeb9c4;
   padding-bottom: 20px;
@@ -108,7 +108,7 @@ input {
   /* min-width: 320px; */
 }
 .card.first {
-  background-color: #f0efbc;
+  background-color: #ddddd1;
 }
 .search-button,
 .button-current {
@@ -133,23 +133,23 @@ button:focus,
 button:hover {
   transform: scale(1.1);
 
-  background-color: rgb(231, 182, 21);
+  background-color: #ec6e4c;
   justify-content: center;
   color: #fff;
   outline: none;
 }
 .temp-details > p > span,
 .grey {
-  color: #dfb220;
+  color: #ec6e4c;
   font-size: 20px;
   font-weight: 700;
 }
 
 .fa {
-  color: #dfb220;
+  color: #ec6e4c;
 }
 .my-1 {
-  font-size: 20px;
+  font-size: 15px;
 }
 
 *:focus {
@@ -180,7 +180,7 @@ a {
   top: -20px;
 }
 .header {
-  color: #dddddd;
+  color: #2196f3;
 }
 .col-4 {
   padding: 0 0.2rem;
@@ -199,19 +199,21 @@ a {
 }
 .card-mb-3 {
   padding: 16px;
-  margin: 16px 24px;
   border-radius: 16px;
   background-color: #f7e9c4;
   border-color: rgba(238, 237, 237, 0.22);
   box-shadow: 5px 6px 6px 2px #e9ecef;
   text-align: center;
   margin: 0;
-  background-color: #f0efbc;
+  background-color: #ddddd1;
   border-radius: 40px;
+  justify-content: space-between;
 }
 .row {
   max-width: 800px;
   margin: 0 auto;
+  padding: 0;
+  margin-right: 0;
 }
 .img-location {
   padding: 3px;
@@ -223,4 +225,14 @@ a {
   color: black;
   cursor: default;
   text-decoration: none;
+}
+.col {
+  margin: 16px 4px;
+}
+#icon {
+  width: 90px;
+}
+#icon.img-fluid {
+  max-width: 40px;
+  margin-top: 40px;
 }

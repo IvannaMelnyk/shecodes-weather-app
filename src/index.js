@@ -64,6 +64,7 @@ function formatDay(timeStamp) {
 
 function displayForecast(res) {
   let forecast = res.data.daily;
+
   let forecastEl = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
 
@@ -74,7 +75,7 @@ function displayForecast(res) {
         `
             <div class="col">
               <h6  class="weather-date">${formatDay(forecastDay.dt)}</h6>
-              <div class="card-mb-3" style="max-width: 140px">
+              <div class="card-mb-3" style="max-width: 110px">
                 <div class="row g-0">
                   <div class="col-md-4">
                     <img
@@ -93,7 +94,7 @@ function displayForecast(res) {
                     <div class="swiper-slide">
                       <div class="item-title"></div>
                       <div class="item-subtitle">
-                        <span class="subtitle-day">13 of March</span>
+                        <span class="weather-date">13 of March</span>
                       </div>
                       <hr />
                       <div class="item-temperature">
@@ -114,11 +115,9 @@ function displayForecast(res) {
             </div>
            
          `;
-
-    forecastHTML = forecastHTML + `</div>`;
   });
+  forecastHTML = forecastHTML + `</div>`;
   forecastEl.innerHTML = forecastHTML;
-  console.log(forecastHTML);
 }
 function getForecast(coordinates) {
   let units = "metric";
