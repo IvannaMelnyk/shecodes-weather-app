@@ -74,7 +74,7 @@ function displayForecast(res) {
         forecastHTML +
         `
             <div class="col">
-              <h6  class="weather-date">${formatDay(forecastDay.dt)}</h6>
+        
               <div class="card-mb-3" style="max-width: 110px">
                 <div class="row g-0">
                   <div class="col-md-4">
@@ -94,7 +94,9 @@ function displayForecast(res) {
                     <div class="swiper-slide">
                       <div class="item-title"></div>
                       <div class="item-subtitle">
-                        <span class="weather-date">13 of March</span>
+                        <h6 class="weather-date">${formatDay(
+                          forecastDay.dt
+                        )}</h6>
                       </div>
                       <hr />
                       <div class="item-temperature">
