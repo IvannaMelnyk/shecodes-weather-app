@@ -54,22 +54,36 @@ changeDay();
 window.addEventListener("load", changeTime);
 window.addEventListener("load", changeDay);
 
-function displayForecast() {
-  let forecastEl = document.querySelector("#forecast");
+//forecast
+function formatDay(timeStamp) {
+  let date = new Date(timeStamp * 1000);
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  days.forEach(function (day) {
-    let forecastHtml = `<div class="row">`;
-    forecastHtml =
-      forecastHtml +
-      `
+  let day = date.getDay();
+  return days[day];
+}
+
+function displayForecast(res) {
+  let forecast = res.data.daily;
+  let forecastEl = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 5)
+      forecastHTML =
+        forecastHTML +
+        `
             <div class="col">
-              <h6 class="weather-day">Friday</h6>
+              <h6  class="weather-date">${formatDay(forecastDay.dt)}</h6>
               <div class="card-mb-3" style="max-width: 140px">
                 <div class="row g-0">
                   <div class="col-md-4">
                     <img
                       id="icon"
-                      src="http://openweathermap.org/img/wn/50@2x.png"
+                      src="http://openweathermap.org/img/wn/${
+                        forecastDay.weather[0].icon
+                      }@2x.png"
+              id="icon-day-forecast"
+              width="50px"
                       class="img-fluid"
                       alt="wind"
                     />
@@ -85,8 +99,12 @@ function displayForecast() {
                       <div class="item-temperature">
                         <div class="item-icon"></div>
                         <div title="+16°C..+19°C, похмуро, невеликий дощ">
-                          <div class="temperature-max"><h6>+16°C</h6></div>
-                          <div class="temperature-min"><h6>+13°C</h6></div>
+                          <div class="temperature-max"><h6>${Math.round(
+                            forecastDay.temp.max
+                          )}°C</h6></div>
+                          <div class="temperature-min"><h6>${Math.round(
+                            forecastDay.temp.min
+                          )}°C</h6></div>
                         </div>
                       </div>
                     </div>
@@ -96,11 +114,20 @@ function displayForecast() {
             </div>
            
          `;
-  });
-  forecastHtml = forecastHtml + `</div>`;
-  forecastEl.innerHTML = forecastHtml;
-}
 
+    forecastHTML = forecastHTML + `</div>`;
+  });
+  forecastEl.innerHTML = forecastHTML;
+  console.log(forecastHTML);
+}
+function getForecast(coordinates) {
+  let units = "metric";
+  let API_KEY = "36b53dd2d584a4ad50ddd9d91515cd0c";
+  let lat = coordinates.lat;
+  let lon = coordinates.lon;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=${units}`;
+  axios.get(apiUrl).then(displayForecast);
+}
 //ch2
 function displaySearchCity(res) {
   let iconElement = document.querySelector("#icon");
@@ -119,6 +146,7 @@ function displaySearchCity(res) {
     `http://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", res.data.weather[0].description);
+  getForecast(res.data.coord);
 }
 function handleSubmit(event) {
   event.preventDefault();
@@ -141,7 +169,6 @@ function searchCurrentLocation(position) {
   axios.get(BASE_URL).then(displaySearchCity);
 }
 
-displayForecast();
 //put listener on form
 let form = document.querySelector(".search-form");
 form.addEventListener("submit", handleSubmit);
@@ -153,6 +180,7 @@ function getCurrentWeather(event) {
 //put listener on Current button
 let currentLocation = document.querySelector(".button-current");
 currentLocation.addEventListener("click", getCurrentWeather);
+displayForecast();
 //ch3
 // function changeToFarengeitTemp(event) {
 //   event.preventDefault();
